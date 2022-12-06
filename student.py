@@ -109,6 +109,48 @@ while True:
             print(x)
             if x:
                 no_id = False
+            
+            while True:
+                q = input("Do you want to edit data?y/n \n")
+                
+                if q ==  'y':
+                    
+                    def edit():
+                        table_name = ['1 : fname', '2 : lname', '3 : DOB', '4 : address', '5 : phoneNumber',]
+                        for m in table_name :
+                            print(m)
+                            
+                        numberchoosen = input("What table name you want to edit? choose by number...  \n")
+                    
+                        if numberchoosen == '1':
+                            name = 'fname'
+                            return name
+                        elif numberchoosen == '2':
+                            name = 'lname'
+                            return name
+                        elif numberchoosen == '3':
+                            name = 'DOB'
+                            return name
+                        elif numberchoosen == '4':
+                            name = 'address'
+                            return name
+                        elif numberchoosen == '5':
+                            name = 'phoneNumber'
+                            return name
+                    
+                    update = edit()
+                    updated_value = input("set new value \n")
+                    sql = "UPDATE students SET " + update + " = %s WHERE id = %s"
+                    # print(sql)
+                    value = ( updated_value, id)
+                    
+                    mycursor.execute(sql, value)
+                    mydb.commit()
+                    print(mycursor.rowcount, "record(s) affected")
+                    continue
+                    
+                elif q == "n":
+                    break
                 
         if no_id:
                 print('not found..') 
